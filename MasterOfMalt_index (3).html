@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHUK x Master of Malt — Regional Sales Support</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&display=swap');
+
+  :root {
+    --navy:   #0E2841;
+    --steel:  #156082;
+    --orange: #E97132;
+    --white:  #FFFFFF;
+    --bg:     #F4F6F8;
+    --border: #D0D8E0;
+    --text:   #1A1A1A;
+    --muted:  #6B7A8D;
+    --input-yellow: #FFF9EC;
+    --btb-bg: #E8F2FA; --btb-bd: #8AB8D8; --btb-tx: #0E3A5C;
+    --btg-bg: #E6F4EC; --btg-bd: #7DC49A; --btg-tx: #0E4020;
+    --menu-bg: #F1ECF6; --menu-bd: #B9A4D6; --menu-tx: #3D2A5C;
+    --none-bg: #F1F2F4; --none-bd: #C6CCD3; --none-tx: #4A5563;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body { font-family: 'Barlow', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+
+  .header { background: var(--navy); }
+  .header-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; border-bottom: 3px solid var(--orange);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .brand-name { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.55); letter-spacing: 0.22em; text-transform: uppercase; display: block; }
+  .brand-sub  { font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.35); letter-spacing: 0.18em; text-transform: uppercase; display: block; }
+  .header-right { text-align: right; }
+  .header-label { font-size: 10px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange); margin-bottom: 3px; }
+  .header-title { font-size: 20px; font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.15; }
+  .header-bar { background: var(--steel); padding: 7px 32px; display: flex; align-items: center; gap: 10px; }
+  .year-text { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .year-pill { background: var(--orange); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; }
+
+  .container { max-width: 860px; margin: 24px auto; padding: 0 14px; }
+  .howitworks {
+    background: var(--white); border-left: 3px solid var(--orange);
+    box-shadow: 0 1px 10px rgba(14,40,65,0.09);
+    padding: 13px 18px; margin-bottom: 18px;
+    font-size: 13px; color: var(--navy); line-height: 1.55;
+  }
+  .howitworks strong { color: var(--orange); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; margin-right: 4px; }
+  .howitworks ul { margin: 6px 0 10px 18px; }
+  .howitworks li { margin-bottom: 2px; }
+  .card { background: var(--white); border-top: 3px solid var(--navy); box-shadow: 0 1px 10px rgba(14,40,65,0.09); margin-bottom: 18px; }
+  .card-hd { background: var(--navy); padding: 12px 20px; display: flex; align-items: center; gap: 10px; }
+  .card-hd-title { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); }
+  .card-hd-rule { flex: 1; height: 1px; background: rgba(255,255,255,0.18); }
+
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; padding: 20px; }
+  .fg { display: flex; flex-direction: column; gap: 5px; }
+  .fg label { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .fg input {
+    padding: 11px 13px; border: 1.5px solid var(--border);
+    font-family: 'Barlow', sans-serif; font-size: 15px; color: var(--text);
+    background: var(--white); outline: none;
+    transition: border-color 0.15s; -webkit-appearance: none; border-radius: 0;
+  }
+  .fg input:focus { border-color: var(--steel); }
+  .fg input::placeholder { color: #BDC8D4; }
+  .fg .err { font-size: 11px; color: #B92B2B; font-weight: 600; display: none; margin-top: 2px; }
+  .fg.bad input { border-color: #B92B2B; }
+  .fg.bad .err { display: block; }
+
+  .note-strip { background: var(--navy); color: rgba(255,255,255,0.55); font-size: 11px; font-style: italic; padding: 7px 20px; }
+
+  .cat-strip { background: var(--steel); color: rgba(255,255,255,0.9); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 20px; }
+
+  .product-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 90px 120px 110px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .product-row:nth-child(even) { background: #F7FAFC; }
+  .product-row:hover { background: #EBF4FA; }
+
+  .pr-name { padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--navy); border-right: 1px solid var(--border); }
+
+  .pr-support { padding: 10px 8px; text-align: center; font-size: 12px; font-weight: 600; color: var(--steel); border-right: 1px solid var(--border); }
+  .pr-support small { display: block; font-size: 8px; font-weight: 400; color: var(--muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pr-support .dual { font-size: 10.5px; line-height: 1.5; }
+  .pr-support .dual span { display: block; }
+
+  .pr-units { padding: 8px; text-align: center; border-right: 1px solid var(--border); }
+  .pr-units small { display: block; font-size: 8px; font-weight: 700; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pr-units input {
+    width: 100%; padding: 7px 4px; border: 1.5px solid var(--border); border-radius: 0;
+    font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 600;
+    text-align: center; background: var(--input-yellow); color: var(--text);
+    outline: none; -webkit-appearance: none; transition: border-color 0.15s;
+  }
+  .pr-units input:focus { border-color: var(--steel); }
+
+  .pr-listing { padding: 8px; text-align: center; border-right: 1px solid var(--border); }
+  .pr-listing small { display: block; font-size: 8px; font-weight: 700; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pr-listing select {
+    width: 100%; padding: 7px 4px; border: 1.5px solid var(--border); border-radius: 0;
+    font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--muted); background: var(--white); outline: none; cursor: pointer;
+    -webkit-appearance: none; appearance: none; transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .pr-listing select.btb { background: var(--btb-bg); border-color: var(--btb-bd); color: var(--btb-tx); }
+  .pr-listing select.btg { background: var(--btg-bg); border-color: var(--btg-bd); color: var(--btg-tx); }
+  .pr-listing .tag {
+    display: inline-block; width: 100%; padding: 7px 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    border: 1.5px solid var(--border);
+  }
+  .pr-listing .tag.btb  { background: var(--btb-bg);  border-color: var(--btb-bd);  color: var(--btb-tx); }
+  .pr-listing .tag.btg  { background: var(--btg-bg);  border-color: var(--btg-bd);  color: var(--btg-tx); }
+  .pr-listing .tag.menu { background: var(--menu-bg); border-color: var(--menu-bd); color: var(--menu-tx); font-size: 9.5px; }
+  .pr-listing .tag.none { background: var(--none-bg); border-color: var(--none-bd); color: var(--none-tx); }
+
+  .pr-total { padding: 10px 8px; text-align: center; }
+  .pr-total small { display: block; font-size: 8px; font-weight: 700; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pr-total-val { font-size: 13px; font-weight: 700; color: var(--steel); }
+
+  .total-strip { background: var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 13px 20px; }
+  .total-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  .total-val { font-size: 20px; font-weight: 800; color: var(--orange); }
+
+  .disclaimer { background: #FFF8F0; border-top: 2px solid var(--orange); padding: 14px 20px; display: flex; align-items: flex-start; gap: 10px; }
+  .disclaimer-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .disclaimer-text { font-size: 12px; color: #7A4010; line-height: 1.55; }
+  .disclaimer-text strong { color: #5C2E05; font-weight: 700; }
+
+  .submit-bar { background: var(--navy); padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .submit-note { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .submit-note strong { color: rgba(255,255,255,0.85); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 28px; background: var(--orange); color: var(--white);
+    border: none; font-family: 'Barlow', sans-serif;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+    cursor: pointer; border-radius: 0; white-space: nowrap;
+    transition: background 0.2s, transform 0.1s; -webkit-appearance: none;
+  }
+  .btn:hover { background: #c95e1f; }
+  .btn:active { transform: scale(0.98); }
+  .btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .btn:disabled { background: #999; cursor: not-allowed; transform: none; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(14px);
+    background: var(--navy); color: var(--white);
+    padding: 12px 20px; font-size: 13px; font-weight: 600;
+    border-left: 3px solid var(--orange);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 999; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 600px) {
+    .header-top { padding: 14px 16px; }
+    .header-right { text-align: left; }
+    .header-title { font-size: 16px; }
+    .header-bar { padding: 7px 16px; }
+    .container { padding: 0 10px; margin: 14px auto; }
+    .fields { grid-template-columns: 1fr; gap: 12px; padding: 16px; }
+
+    .product-row {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      padding: 12px 14px;
+      gap: 10px;
+    }
+    .pr-name    { grid-column: 1 / -1; padding: 0 0 8px 0; border-right: none; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .pr-support { border-right: none; padding: 0; text-align: left; }
+    .pr-units   { border-right: none; padding: 0; }
+    .pr-listing { border-right: none; padding: 0; }
+    .pr-total   { grid-column: 1 / -1; padding: 6px 0 0 0; text-align: left; border-top: 1px solid var(--border); }
+    .pr-total small { display: inline; margin-right: 6px; }
+    .pr-units input, .pr-listing select { font-size: 16px; padding: 10px 8px; }
+    .disclaimer { padding: 12px 14px; }
+    .submit-bar { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; padding: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <span class="brand-name">Moët Hennessy</span>
+      <span class="brand-sub">x Master of Malt</span>
+    </div>
+    <div class="header-right">
+      <div class="header-label">MHUK x Master of Malt</div>
+      <div class="header-title">Non-Called-On Account Support</div>
+    </div>
+  </div>
+  <div class="header-bar">
+    <span class="year-text">Ongoing Programme</span>
+    <span class="year-pill">Active</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="howitworks">
+    <strong>Eligibility:</strong>
+    <ul>
+      <li><b>Who to target</b> — Non-MH called on accounts.</li>
+      <li><b>Volume Requirement</b> — Minimum 100 bottles/year across MHUK portfolio.</li>
+      <li><b>Data Requirement</b> — Full MHUK outlet-level sales-out data shared within the first 2 weeks of each month.</li>
+    </ul>
+    <strong>How it works:</strong> Fill in the account details and enter cases against any SKUs you're proposing support for. Clicking Submit opens a pre-filled email in your mail app addressed to Oscar and logs your request for his approval — review the email and hit Send.
+  </div>
+
+  <div class="card">
+    <div class="card-hd">
+      <span class="card-hd-title">01 — Account Details</span>
+      <div class="card-hd-rule"></div>
+    </div>
+    <div class="fields">
+      <div class="fg" id="fg-name">
+        <label for="f-name">Team Member</label>
+        <input type="text" id="f-name" placeholder="Your full name" autocomplete="name">
+        <span class="err">Required</span>
+      </div>
+      <div class="fg" id="fg-code">
+        <label for="f-code">Account Code</label>
+        <input type="text" id="f-code" placeholder="Enter account code">
+        <span class="err">Required</span>
+      </div>
+      <div class="fg" id="fg-account">
+        <label for="f-account">Prospect Account</label>
+        <input type="text" id="f-account" placeholder="Account / venue name" autocomplete="organization">
+        <span class="err">Required</span>
+      </div>
+      <div class="fg" id="fg-postcode">
+        <label for="f-postcode">Postcode</label>
+        <input type="text" id="f-postcode" placeholder="e.g. EC1A 1BB" style="text-transform:uppercase">
+        <span class="err">Required</span>
+      </div>
+      <div class="fg" id="fg-date">
+        <label for="f-date">Proposed Start Date</label>
+        <input type="text" id="f-date" placeholder="e.g. 01.04.26">
+        <span class="err">Required</span>
+      </div>
+    </div>
+    <div class="note-strip">* This is an ongoing agreement</div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd">
+      <span class="card-hd-title">02 — Product Support Request</span>
+      <div class="card-hd-rule"></div>
+    </div>
+    <div id="productsWrap"></div>
+    <div class="total-strip">
+      <span class="total-label">Total Proposed Support</span>
+      <span class="total-val" id="grandTotal">£0.00</span>
+    </div>
+    <div class="disclaimer">
+      <span class="disclaimer-icon">⚠️</span>
+      <p class="disclaimer-text"><strong>Important:</strong> Submitting this request does not constitute approval of support. This support must not be offered or communicated to the account until you have received written email approval from Oscar. All support figures are retro, per bottle.</p>
+    </div>
+    <div class="submit-bar">
+      <p class="submit-note">Review your email draft before sending — this does not submit automatically.</p>
+      <button class="btn" id="submitBtn" onclick="handleSubmit()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Submit Request
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// TODO: swap in the Master of Malt Google Sheet Apps Script URL once the tracker is built.
+const SHEET_URL = '';
+
+function fmt(n) {
+  return '£' + Number(n).toLocaleString('en-GB', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+// Generates a short, unique-enough ID like MOM-260812-1437 (date + time)
+function genSubmissionId() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  const yy = String(d.getFullYear()).slice(2);
+  const mm = pad(d.getMonth() + 1);
+  const dd = pad(d.getDate());
+  const hh = pad(d.getHours());
+  const min = pad(d.getMinutes());
+  return `MOM-${yy}${mm}${dd}-${hh}${min}`;
+}
+
+/*
+  type meanings:
+    MENU -> generic "Menu Listing" support, single fixed £/bottle (p). No BTG/BTB split in this dataset.
+  Prices below are per bottle: original deck figures were per case of 6, so each has been divided by 6.
+  Glenmorangie 18YO Infinita's case is a single bottle, and its per-bottle price has been set separately.
+*/
+const PRODUCTS = [
+  { cat: 'Whisky', items: [
+    { name: 'Ardbeg 10 Year Old 70cl',            type: 'MENU', p: 2.00 },
+    { name: 'Ardbeg 17 Year Old 70cl',            type: 'MENU', p: 7.50 },
+    { name: 'Glenmorangie 12YO Original 70cl',    type: 'MENU', p: 2.00 },
+    { name: 'Glenmorangie 18YO Infinita 70cl',    type: 'MENU', p: 1.67 },
+    { name: 'Glenmorangie Lasanta 70cl',          type: 'MENU', p: 2.50 },
+    { name: 'Glenmorangie Nectar 70cl',           type: 'MENU', p: 25/6 },
+    { name: 'Glenmorangie Quinta Ruban 70cl',     type: 'MENU', p: 2.50 },
+  ]},
+  { cat: 'Rum', items: [
+    { name: 'Eminente Ámbar Claro Rum 70cl', type: 'MENU', p: 1.50 },
+    { name: 'Eminente Reserva Rum 70cl',     type: 'MENU', p: 3.00 },
+  ]},
+  { cat: 'Cognac', items: [
+    { name: 'Hennessy VS 70cl',   type: 'MENU', p: 2.00 },
+    { name: 'Hennessy VSOP 70cl', type: 'MENU', p: 2.00 },
+    { name: 'Hennessy XO 70cl',   type: 'MENU', p: 8.00 },
+  ]},
+  { cat: 'Vodka', items: [
+    { name: 'Belvedere Organic Dirty Brew 70cl', type: 'MENU', p: 2.00 },
+    { name: 'Belvedere Organic Vodka Pure 70cl', type: 'MENU', p: 2.00 },
+  ]},
+  { cat: 'Tequila', items: [
+    { name: 'Volcán Blanco Tequila 70cl',    type: 'MENU', p: 3.00 },
+    { name: 'Volcán Reposado Tequila 70cl',  type: 'MENU', p: 3.00 },
+  ]},
+];
+
+const ITEM_MAP = {}; // id -> item, for price lookups during recalc
+
+function buildProducts() {
+  const wrap = document.getElementById('productsWrap');
+  PRODUCTS.forEach(cat => {
+    const strip = document.createElement('div');
+    strip.className = 'cat-strip';
+    strip.textContent = cat.cat;
+    wrap.appendChild(strip);
+
+    cat.items.forEach((item, i) => {
+      const id = cat.cat.replace(/\W/g,'') + '_' + i;
+      ITEM_MAP[id] = item;
+      const row = document.createElement('div');
+      row.className = 'product-row';
+
+      let supportHtml;
+      if (item.type === 'BOTH') {
+        supportHtml = `<small>Per Bottle</small><span class="dual"><span>BTG ${fmt(item.pBTG)}</span><span>BTB ${fmt(item.pBTB)}</span></span>`;
+      } else {
+        supportHtml = `<small>Per Bottle</small>${fmt(item.p)}`;
+      }
+
+      let listingHtml;
+      if (item.type === 'BOTH') {
+        listingHtml = `
+          <small>BTG / BTB</small>
+          <select id="s_${id}" onchange="styleSelect(this); recalc('${id}')">
+            <option value="">— Select —</option>
+            <option value="BTG">BTG</option>
+            <option value="BTB">BTB</option>
+          </select>`;
+      } else if (item.type === 'BTG') {
+        listingHtml = `<small>Listing</small><span class="tag btg">BTG only</span>`;
+      } else if (item.type === 'BTB') {
+        listingHtml = `<small>Listing</small><span class="tag btb">BTB only</span>`;
+      } else if (item.type === 'MENU') {
+        listingHtml = `<small>Listing</small><span class="tag menu">Menu Listing</span>`;
+      } else {
+        listingHtml = `<small>Listing</small><span class="tag none">—</span>`;
+      }
+
+      row.innerHTML = `
+        <div class="pr-name">${item.name}</div>
+        <div class="pr-support">${supportHtml}</div>
+        <div class="pr-units">
+          <small>Units</small>
+          <input type="number" min="0" step="1" placeholder="0"
+            id="u_${id}" oninput="recalc('${id}')">
+        </div>
+        <div class="pr-listing">${listingHtml}</div>
+        <div class="pr-total">
+          <small>Total Investment</small>
+          <span class="pr-total-val" id="t_${id}">${fmt(0)}</span>
+        </div>
+      `;
+      wrap.appendChild(row);
+    });
+  });
+}
+
+function styleSelect(sel) {
+  sel.className = '';
+  if (sel.value === 'BTB') sel.className = 'btb';
+  else if (sel.value === 'BTG') sel.className = 'btg';
+}
+
+// Resolve the £/case that applies right now for a given row id
+function priceFor(id) {
+  const item = ITEM_MAP[id];
+  if (item.type === 'BOTH') {
+    const sel = document.getElementById('s_' + id);
+    const val = sel ? sel.value : '';
+    if (val === 'BTG') return item.pBTG;
+    if (val === 'BTB') return item.pBTB;
+    return 0;
+  }
+  return item.p;
+}
+
+function recalc(id) {
+  const input = document.getElementById('u_' + id);
+  const cases = parseInt(input.value) || 0;
+  const price = priceFor(id);
+  document.getElementById('t_' + id).textContent = fmt(cases * price);
+
+  let grand = 0;
+  Object.keys(ITEM_MAP).forEach(rowId => {
+    const u = parseInt(document.getElementById('u_' + rowId)?.value) || 0;
+    grand += u * priceFor(rowId);
+  });
+  document.getElementById('grandTotal').textContent = fmt(grand);
+}
+
+function validate() {
+  let ok = true;
+  [['f-name','fg-name'],['f-code','fg-code'],['f-account','fg-account'],['f-postcode','fg-postcode'],['f-date','fg-date']].forEach(([fid, gid]) => {
+    const el = document.getElementById(fid);
+    const fg = document.getElementById(gid);
+    if (!el.value.trim()) { fg.classList.add('bad'); ok = false; }
+    else fg.classList.remove('bad');
+  });
+  return ok;
+}
+
+function collectRows() {
+  const rows = [];
+  PRODUCTS.forEach(cat => {
+    cat.items.forEach((item, i) => {
+      const id = cat.cat.replace(/\W/g,'') + '_' + i;
+      const cases = parseInt(document.getElementById('u_' + id)?.value) || 0;
+      if (cases <= 0) return;
+
+      let pos;
+      if (item.type === 'BOTH') pos = document.getElementById('s_' + id)?.value || '(not selected)';
+      else if (item.type === 'MENU') pos = 'Menu Listing';
+      else if (item.type === 'NONE') pos = '—';
+      else pos = item.type;
+
+      const price = priceFor(id);
+      const lineTotal = document.getElementById('t_' + id)?.textContent || fmt(0);
+      rows.push({ cat: cat.cat, name: item.name, p: fmt(price), units: cases, pos, total: lineTotal });
+    });
+  });
+  return rows;
+}
+
+async function handleSubmit() {
+  if (!validate()) { showToast('Please complete all required fields.'); return; }
+
+  const name     = document.getElementById('f-name').value.trim();
+  const code     = document.getElementById('f-code').value.trim();
+  const account  = document.getElementById('f-account').value.trim();
+  const postcode = document.getElementById('f-postcode').value.trim().toUpperCase();
+  const date     = document.getElementById('f-date').value.trim();
+  const grand    = document.getElementById('grandTotal').textContent;
+  const rows     = collectRows();
+  const subId    = genSubmissionId();
+
+  let body = `Hi Oscar,\n\nPlease find below a new business support request (non-called-on account) for your approval.\n\nSubmission ID: ${subId}\n\n`;
+  body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nACCOUNT DETAILS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  body += `Team Member:        ${name}\nProspect Account:   ${account}\nAccount Code:       ${code}\nPostcode:           ${postcode}\nProposed Start:     ${date}\nNote: This is an ongoing agreement\n\n`;
+
+  if (rows.length) {
+    body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPRODUCT SUPPORT REQUEST\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    let cc = '';
+    rows.forEach(r => {
+      if (r.cat !== cc) { cc = r.cat; body += `[ ${r.cat} ]\n`; }
+      body += `  Product:          ${r.name}\n  Support/Bottle:   ${r.p}\n  Units:            ${r.units.toLocaleString('en-GB')}\n  Listing Type:     ${r.pos}\n  Total Investment: ${r.total}\n  ─────────────────────────────────\n`;
+    });
+    body += `\nTOTAL PROPOSED SUPPORT:  ${grand}\n`;
+  } else {
+    body += `Note: No products with units entered.\n`;
+  }
+  body += `\nKind regards,\n${name}\n`;
+
+  window.location.href = `mailto:ovallance@moethennessy.com?subject=${encodeURIComponent(subId + ' — Master of Malt Support Request — ' + account)}&body=${encodeURIComponent(body)}`;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Logging…';
+
+  if (SHEET_URL) {
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'mom',
+          submissionId: subId,
+          submittedAt: new Date().toLocaleString('en-GB'),
+          name, code, account, postcode, date, grand, rows
+        })
+      });
+      showToast('Request submitted & logged ✓');
+    } catch (err) {
+      showToast('Email opened — sheet log failed, please retry.');
+    }
+  } else {
+    showToast('Email opened ✓ (tracker not yet connected)');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Submit Request`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+buildProducts();
+</script>
+</body>
+</html>
